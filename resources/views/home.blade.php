@@ -1,93 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - {{ $nama_kampus }}</title>
+@extends('layouts.app')
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        :root{
-            --bg: #0b1220;
-            --card: rgba(255,255,255,0.07);
-            --border: rgba(255,255,255,0.12);
-            --text: #e5e7eb;
-            --muted: rgba(229,231,235,0.75);
-            --primary: #60a5fa;
-            --primary2: #22d3ee;
-            --shadow: 0 18px 60px rgba(0,0,0,.35);
-            --radius: 18px;
-        }
-        *{ box-sizing: border-box; }
-        body{
-            margin:0;
-            font-family: Inter, Arial, sans-serif;
-            background:
-                radial-gradient(1100px 520px at 20% 0%, rgba(34,211,238,.18), transparent 55%),
-                radial-gradient(900px 520px at 90% 10%, rgba(96,165,250,.18), transparent 60%),
-                radial-gradient(900px 520px at 50% 100%, rgba(99,102,241,.15), transparent 60%),
-                var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-        .wrap{ max-width: 1100px; margin: 0 auto; padding: 24px; }
-        .card{
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 22px;
-            margin-bottom: 18px;
-        }
-        .grid-2{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-        h1,h2{ margin: 0 0 10px; }
-        p{ margin: 0 0 10px; color: var(--muted); }
-        ul{ margin: 0; padding-left: 18px; color: var(--muted); }
-        .chip{
-            display:inline-flex;
-            align-items:center;
-            gap:8px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: rgba(229,231,235,0.88);
-            font-size: 12px;
-        }
-        .dot{ width: 8px; height: 8px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary2));
-        }
-        .btn{
-            display:inline-block;
-            padding: 10px 14px;
-            border-radius: 999px;
-            border: 1px solid rgba(96,165,250,0.55);
-            background: linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,211,238,.12));
-            color: var(--text);
-            text-decoration:none;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        footer{
-            text-align:center;
-            padding: 16px 0 28px;
-            color: rgba(229,231,235,0.55);
-            font-size: 12px;
-        }
-        @media (max-width: 820px){
-            .grid-2{ grid-template-columns: 1fr; }
-        }
-    </style>
-</head>
-<body>
-
+@section('content')
 <div class="wrap">
 
     {{-- 1) Judul Utama --}}
@@ -101,18 +14,71 @@
 
     {{-- 4) Deskripsi Sejarah --}}
     @include('partials.home._sejarah')
-
+    <div class="card">
+        <h2>Daftar Program Studi</h2>
+        <p>Berikut daftar program studi beserta statusnya.</p>
+    
+        <div style="overflow:auto; border-radius: 14px;">
+            <table style="width:100%; border-collapse: collapse; min-width: 520px;">
+                <thead>
+                    <tr>
+                        <th style="text-align:left; padding:12px 14px; background: rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.12);">
+                            Nama Program Studi
+                        </th>
+                        <th style="text-align:left; padding:12px 14px; background: rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.12); width: 180px;">
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    @forelse(($prodi ?? []) as $item)
+                        <tr>
+                            <td style="padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.08); color: rgba(229,231,235,0.9);">
+                                {{ $item['nama'] }}
+                            </td>
+    
+                            <td style="padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.08);">
+                                @php
+                                    $isUnggulan = strtolower($item['status']) === 'unggulan';
+                                @endphp
+    
+                                <span style="
+                                    display:inline-flex;
+                                    align-items:center;
+                                    gap:8px;
+                                    padding:6px 10px;
+                                    border-radius:999px;
+                                    font-size:12px;
+                                    border:1px solid rgba(255,255,255,0.12);
+                                    background: {{ $isUnggulan ? 'rgba(96,165,250,.18)' : 'rgba(255,255,255,0.06)' }};
+                                    color: rgba(229,231,235,0.9);
+                                ">
+                                    <span style="
+                                        width:8px;height:8px;border-radius:50%;
+                                        background: {{ $isUnggulan ? 'linear-gradient(135deg, #60a5fa, #22d3ee)' : 'rgba(229,231,235,0.45)' }};
+                                    "></span>
+                                    {{ $item['status'] }}
+                                </span>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="2" style="padding:14px; color: rgba(229,231,235,0.7);">
+                                Data program studi belum tersedia.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
     <div class="card">
         <h2>Navigasi</h2>
         <p>Kamu sedang di <b>home</b>.</p>
         <a class="btn" href="{{ url('/home') }}">Buka home</a>
     </div>
 
-    <footer>
-        © {{ date('Y') }} {{ $nama_kampus }} • Dibuat dengan Laravel
-    </footer>
-
 </div>
-
-</body>
-</html>
+@endsection

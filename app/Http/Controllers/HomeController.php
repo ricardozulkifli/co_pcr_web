@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    private function baseData(): array
     {
-        $data = [
+        return [
             'nama_kampus' => 'Politeknik Caltex Riau (PCR)',
             'slogan'      => 'Vokasi Unggul, Siap Kerja, Berdaya Saing Global',
 
@@ -28,8 +28,37 @@ class HomeController extends Controller
 
             // pastikan file ada di: public/assets/images/logo-pcr.png
             'logo' => 'assets/images/logo-pcr.png',
-        ];
+            'prodi' => [
+    ['nama' => 'Teknik Informatika',          'status' => 'Unggulan'],
+    ['nama' => 'Sistem Informasi',            'status' => 'Unggulan'],
+    ['nama' => 'Teknik Elektro',              'status' => 'Reguler'],
+    ['nama' => 'Teknik Mesin',                'status' => 'Reguler'],
+    ['nama' => 'Akuntansi',                   'status' => 'Reguler'],
+],
 
-        return view('home', $data);
+        ];
+    }
+
+    public function index()
+    {
+        return view('home', $this->baseData());
+    }
+
+    public function profil()
+    {
+        $data = $this->baseData();
+        return view('profil', $data);
+    }
+
+    public function sejarah()
+    {
+        $data = $this->baseData();
+        return view('sejarah', $data);
+    }
+
+    public function visiMisi()
+    {
+        $data = $this->baseData();
+        return view('visi_misi', $data);
     }
 }
