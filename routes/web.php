@@ -1,20 +1,35 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KunjunganController;
 
-/**
- * Home
- * /  -> redirect ke /home
- * /home -> halaman home
- */
-Route::redirect('/', '/home')->name('root');
+/*
+|--------------------------------------------------------------------------
+| HOME
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home.page');
 
-/**
- * Menu Navbar (opsional tapi disarankan biar tidak 404)
- */
+/*
+|--------------------------------------------------------------------------
+| PROFIL
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/profil', [HomeController::class, 'profil'])->name('profil');
 Route::get('/sejarah', [HomeController::class, 'sejarah'])->name('sejarah');
 Route::get('/visi-misi', [HomeController::class, 'visiMisi'])->name('visi_misi');
+
+/*
+|--------------------------------------------------------------------------
+| KUNJUNGAN
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/kunjungan', [KunjunganController::class, 'create'])
+    ->name('kunjungan.form');
+
+Route::post('/kunjungan', [KunjunganController::class, 'store'])
+    ->name('kunjungan.store');

@@ -28,6 +28,7 @@ class HomeController extends Controller
 
             // pastikan file ada di: public/assets/images/logo-pcr.png
             'logo' => 'assets/images/logo-pcr.png',
+
             'prodi' => [
     ['nama' => 'Teknik Informatika',          'status' => 'Unggulan'],
     ['nama' => 'Sistem Informasi',            'status' => 'Unggulan'],

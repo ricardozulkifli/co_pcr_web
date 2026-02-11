@@ -10,3 +10,4 @@
 <script src="{{ ('assets/js/master.js') }}"></script>
 <script src="{{ ('assets/js/validator.js') }}"></script>
 <script src="{{ ('assets/js/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
+<script src="{{ asset('assets/js/kunjungan.js') }}"></script>

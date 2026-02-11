@@ -1,158 +1,185 @@
 @php
-    // Active state pakai route name (lebih rapi & akurat)
-    $isHome    = request()->routeIs('home') || request()->routeIs('home.page');
-    $isProfil  = request()->routeIs('profil');
-    $isSejarah = request()->routeIs('sejarah');
-    $isVM      = request()->routeIs('visi_misi');
+    $isHome      = request()->routeIs('home');
+    $isProfil    = request()->routeIs('profil');
+    $isSejarah   = request()->routeIs('sejarah');
+    $isVM        = request()->routeIs('visi_misi');
+    $isKunjungan = request()->routeIs('kunjungan.form');
 @endphp
 
-<div class="nav-wrap">
-    <div class="nav nav--glass">
-        {{-- LEFT: brand --}}
-        <div class="nav-left">
-            <a href="{{ route('home') }}" class="nav-brand" aria-label="Beranda">
-                {{-- kalau kamu punya logo kampus, ganti src --}}
-                <span class="nav-logo">
-                    <span class="dot"></span>
-                </span>
+<style>
+/* ===============================
+   NAVBAR PROFESSIONAL STYLE
+================================= */
 
-                <span class="brand">
-                    <b>{{ $nama_kampus ?? 'Kampus' }}</b>
-                    <small>{{ $slogan ?? 'Website Profil Kampus' }}</small>
-                </span>
-            </a>
-        </div>
-
-        {{-- RIGHT: links --}}
-        <nav class="nav-links" aria-label="Navigasi utama">
-            <a class="nav-link {{ $isHome ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
-            <a class="nav-link {{ $isProfil ? 'active' : '' }}" href="{{ route('profil') }}">Profil</a>
-            <a class="nav-link {{ $isSejarah ? 'active' : '' }}" href="{{ route('sejarah') }}">Sejarah</a>
-            <a class="nav-link {{ $isVM ? 'active' : '' }}" href="{{ route('visi_misi') }}">Visi & Misi</a>
-
-            <span class="nav-sep"></span>
-
-            <a class="btn btn-primary" href="{{ route('home') }}">Masuk</a>
-        </nav>
-    </div>
-</div>
-<style>.nav-wrap{
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 18px 24px 0;
+.navbar-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 24px 20px 0;
 }
 
-.nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    padding: 14px 16px;
+.navbar-container {
+    width: 100%;
+    max-width: 1150px;
+    height: 72px;
+    padding: 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     border-radius: 18px;
+    backdrop-filter: blur(18px);
+    background: rgba(17, 25, 40, 0.75);
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
 }
 
-.nav--glass{
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    backdrop-filter: blur(14px);
+/* ===== BRAND ===== */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
 }
 
-.nav-brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-    color: inherit;
-    min-width: 0;
-}
-
-.nav-logo{
-    width: 34px;
-    height: 34px;
+.brand-logo {
+    width: 44px;
+    height: 44px;
     border-radius: 12px;
-    display:grid;
-    place-items:center;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
 }
 
-.brand{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-    min-width:0;
+.brand-text {
+    display: flex;
+    flex-direction: column;
 }
 
-.brand b{
-    font-size: 13px;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.brand-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
 }
 
-.brand small{
-    font-size: 11px;
-    color: rgba(229,231,235,0.65);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-}
-
-.nav-link{
-    color: rgba(229,231,235,0.78);
-    text-decoration:none;
+.brand-sub {
     font-size: 12px;
-    padding: 8px 10px;
+    color: rgba(255,255,255,0.65);
+}
+
+/* ===== MENU ===== */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-item {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.nav-item:hover {
+    color: #ffffff;
+}
+
+.nav-item.active {
+    color: #ffffff;
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #3b82f6;
+    border-radius: 6px;
+}
+
+/* ===== BUTTON LOGIN ===== */
+.btn-login {
+    padding: 8px 20px;
     border-radius: 999px;
-    border: 1px solid transparent;
-    transition: background .12s ease, border-color .12s ease, color .12s ease;
+    background: #2563eb;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s ease;
 }
 
-.nav-link:hover{
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(255,255,255,0.12);
-    color: rgba(229,231,235,0.92);
+.btn-login:hover {
+    background: #1d4ed8;
 }
 
-.nav-link.active{
-    background: linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,211,238,.12));
-    border-color: rgba(96,165,250,.45);
-    color: rgba(229,231,235,0.95);
-    box-shadow: 0 10px 30px rgba(0,0,0,.20);
-}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
 
-.nav-sep{
-    width: 1px;
-    height: 22px;
-    background: rgba(255,255,255,0.12);
-    margin: 0 2px;
-}
-
-.btn-primary{
-    border-color: rgba(34,211,238,.55);
-    background: linear-gradient(135deg, rgba(96,165,250,.22), rgba(34,211,238,.16));
-}
-
-@media (max-width: 820px){
-    .nav{
+    .navbar-container {
         flex-direction: column;
-        align-items: stretch;
+        height: auto;
+        padding: 20px;
+        gap: 18px;
     }
-    .nav-links{
-        justify-content: flex-start;
+
+    .navbar-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
     }
-    .nav-sep{
-        display:none;
-    }
+
 }
 </style>
+
+<header class="navbar-wrapper">
+    <div class="navbar-container">
+
+
+            <div class="brand-text">
+                <span class="brand-title">{{ $nama_kampus ?? 'Kampus' }}</span>
+                <span class="brand-sub">{{ $slogan ?? 'Website Profil Kampus' }}</span>
+            </div>
+        </a>
+
+        <nav class="navbar-menu">
+
+            <a class="nav-item {{ $isHome ? 'active' : '' }}"
+               href="{{ route('home') }}">
+               Home
+            </a>
+
+            <a class="nav-item {{ $isProfil ? 'active' : '' }}"
+               href="{{ route('profil') }}">
+               Profil
+            </a>
+
+            <a class="nav-item {{ $isSejarah ? 'active' : '' }}"
+               href="{{ route('sejarah') }}">
+               Sejarah
+            </a>
+
+            <a class="nav-item {{ $isVM ? 'active' : '' }}"
+               href="{{ route('visi_misi') }}">
+               Visi & Misi
+            </a>
+
+            <a class="nav-item {{ $isKunjungan ? 'active' : '' }}"
+               href="{{ route('kunjungan.form') }}">
+               Kunjungan
+            </a>
+
+            <a class="btn-login"
+               href="{{ route('home') }}">
+               Masuk
+            </a>
+
+        </nav>
+
+    </div>
+</header>

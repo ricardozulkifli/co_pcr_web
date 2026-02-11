@@ -1,0 +1,243 @@
+/* ===== FORM KUNJUNGAN STYLE ===== */
+
+.form-section {
+    padding: 80px 0;
+}
+
+.form-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.form-subtitle {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control-custom {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+.form-control-custom:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 2px rgba(96,165,250,0.3);
+}
+
+.form-error {
+    color: #f87171;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.btn-primary-custom {
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #60a5fa, #22d3ee);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(96,165,250,0.4);
+}
+
+.alert-success-custom {
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.4);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    color: #22c55e;
+}
+/* =========================
+   HOME PAGE STYLE
+========================= */
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.card h2 {
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.card p {
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* ===== TABLE STYLE ===== */
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 14px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+}
+
+.custom-table thead {
+    background: rgba(255,255,255,0.06);
+}
+
+.custom-table th {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.custom-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: rgba(229,231,235,0.9);
+}
+
+/* ===== STATUS BADGE ===== */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+}
+
+.status-badge.unggulan {
+    background: rgba(96,165,250,.18);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(229,231,235,0.45);
+}
+
+.status-badge.unggulan .status-dot {
+    background: linear-gradient(135deg, #60a5fa, #22d3ee);
+}
+
+/* ===== BUTTON ===== */
+
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #60a5fa, #22d3ee);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(96,165,250,0.4);
+}
+.form-section {
+    padding: 100px 0;
+}
+
+.form-card {
+    max-width: 650px;
+    margin: auto;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.form-subtitle {
+    font-size: 14px;
+    opacity: .7;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control-custom {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    color: white;
+}
+
+.form-error {
+    color: #f87171;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.btn-primary-custom {
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #60a5fa, #22d3ee);
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(96,165,250,.4);
+}
+
+.alert-success-custom {
+    background: rgba(34,197,94,.15);
+    border: 1px solid rgba(34,197,94,.4);
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    color: #22c55e;
+}

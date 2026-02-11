@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('partials.home.layouts.app')
 
 @section('content')
 <div class="wrap">
@@ -14,57 +14,41 @@
 
     {{-- 4) Deskripsi Sejarah --}}
     @include('partials.home._sejarah')
+
+    {{-- 5) Program Studi --}}
     <div class="card">
         <h2>Daftar Program Studi</h2>
         <p>Berikut daftar program studi beserta statusnya.</p>
-    
-        <div style="overflow:auto; border-radius: 14px;">
-            <table style="width:100%; border-collapse: collapse; min-width: 520px;">
+
+        <div class="table-wrapper">
+            <table class="custom-table">
                 <thead>
                     <tr>
-                        <th style="text-align:left; padding:12px 14px; background: rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.12);">
-                            Nama Program Studi
-                        </th>
-                        <th style="text-align:left; padding:12px 14px; background: rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.12); width: 180px;">
-                            Status
-                        </th>
+                        <th>Nama Program Studi</th>
+                        <th style="width:180px;">Status</th>
                     </tr>
                 </thead>
-    
+
                 <tbody>
                     @forelse(($prodi ?? []) as $item)
+
+                        @php
+                            $isUnggulan = strtolower($item['status']) === 'unggulan';
+                        @endphp
+
                         <tr>
-                            <td style="padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.08); color: rgba(229,231,235,0.9);">
-                                {{ $item['nama'] }}
-                            </td>
-    
-                            <td style="padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.08);">
-                                @php
-                                    $isUnggulan = strtolower($item['status']) === 'unggulan';
-                                @endphp
-    
-                                <span style="
-                                    display:inline-flex;
-                                    align-items:center;
-                                    gap:8px;
-                                    padding:6px 10px;
-                                    border-radius:999px;
-                                    font-size:12px;
-                                    border:1px solid rgba(255,255,255,0.12);
-                                    background: {{ $isUnggulan ? 'rgba(96,165,250,.18)' : 'rgba(255,255,255,0.06)' }};
-                                    color: rgba(229,231,235,0.9);
-                                ">
-                                    <span style="
-                                        width:8px;height:8px;border-radius:50%;
-                                        background: {{ $isUnggulan ? 'linear-gradient(135deg, #60a5fa, #22d3ee)' : 'rgba(229,231,235,0.45)' }};
-                                    "></span>
+                            <td>{{ $item['nama'] }}</td>
+                            <td>
+                                <span class="status-badge {{ $isUnggulan ? 'unggulan' : '' }}">
+                                    <span class="status-dot"></span>
                                     {{ $item['status'] }}
                                 </span>
                             </td>
                         </tr>
+
                     @empty
                         <tr>
-                            <td colspan="2" style="padding:14px; color: rgba(229,231,235,0.7);">
+                            <td colspan="2" style="opacity:0.7;">
                                 Data program studi belum tersedia.
                             </td>
                         </tr>
@@ -73,7 +57,8 @@
             </table>
         </div>
     </div>
-    
+
+    {{-- Navigasi --}}
     <div class="card">
         <h2>Navigasi</h2>
         <p>Kamu sedang di <b>home</b>.</p>
