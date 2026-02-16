@@ -170,7 +170,7 @@
             </a>
 
             <a class="nav-item {{ $isKunjungan ? 'active' : '' }}"
-               href="{{ route('kunjungan.form') }}">
+               href="{{ route('home') }}">
                Kunjungan
             </a>
 

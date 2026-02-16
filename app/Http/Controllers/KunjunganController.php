@@ -7,13 +7,13 @@ use App\Models\Kunjungan;
 
 class KunjunganController extends Controller
 {
-    // GET
-    public function create()
+    public function index()
     {
-        return view('kunjungan.form');
+        $kunjungans = Kunjungan::latest()->paginate(5);
+
+        return view('home', compact('kunjungans'));
     }
 
-    // POST
     public function store(Request $request)
     {
         $request->validate([
@@ -24,7 +24,28 @@ class KunjunganController extends Controller
 
         Kunjungan::create($request->all());
 
-        return redirect()->back()
-            ->with('success', 'Pendaftaran berhasil!');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $kunjungan = Kunjungan::findOrFail($id);
+
+        $request->validate([
+            'nama' => 'required',
+            'email' => 'required|email',
+            'institusi' => 'required'
+        ]);
+
+        $kunjungan->update($request->all());
+
+        return redirect()->back()->with('success', 'Data berhasil diupdate!');
+    }
+
+    public function destroy($id)
+    {
+        Kunjungan::destroy($id);
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus!');
     }
 }

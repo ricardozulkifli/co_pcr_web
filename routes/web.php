@@ -9,7 +9,7 @@ use App\Http\Controllers\KunjunganController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [KunjunganController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home.page');
 
 /*
@@ -28,8 +28,11 @@ Route::get('/visi-misi', [HomeController::class, 'visiMisi'])->name('visi_misi')
 |--------------------------------------------------------------------------
 */
 
-Route::get('/kunjungan', [KunjunganController::class, 'create'])
-    ->name('kunjungan.form');
 
-Route::post('/kunjungan', [KunjunganController::class, 'store'])
-    ->name('kunjungan.store');
+
+
+
+Route::post('/kunjungan', [KunjunganController::class, 'store'])->name('kunjungan.store');
+Route::put('/kunjungan/{id}', [KunjunganController::class, 'update'])->name('kunjungan.update');
+Route::delete('/kunjungan/{id}', [KunjunganController::class, 'destroy'])->name('kunjungan.delete');
+
